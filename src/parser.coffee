@@ -134,7 +134,8 @@ class exports.Parser extends events
       # remove the '#' key altogether if it's blank
       if obj[charkey].match(/^\s*$/) and not cdata
         emptyStr = obj[charkey]
-        delete obj[charkey]
+        if not @options.includeWhiteChars
+          delete obj[charkey]
       else
         obj[charkey] = obj[charkey].trim() if @options.trim
         obj[charkey] = obj[charkey].replace(/\s{2,}/g, " ").trim() if @options.normalize
